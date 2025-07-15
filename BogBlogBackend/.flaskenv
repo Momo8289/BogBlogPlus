@@ -1,0 +1,2 @@
+FLASK_APP=bogblog:app
+FLASK_DEBUG=1
