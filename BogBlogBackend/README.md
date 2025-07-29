@@ -28,13 +28,19 @@ Endpoints marked with "auth" require authentication to use. Get an auth token fr
 ### tokens
 #### `/api/token/login` - POST
 Generate an auth token for the user
+
 Request body:
+
 `username`: Username of user to generate a token for
+
 `password`: Password for user
 
 Response body:
+
 `token`: Auth token to use in requests
+
 `expires`: Date when the token expires
+
 
 #### `/api/token/logout` - POST - auth
 Delete the current auth token
@@ -45,21 +51,32 @@ Return info for the current user
 
 #### `/api/user` - POST
 Register a new user
+
 Request body:
+
 `username`: Username of new user
+
 `password`: Password for user
 
+
 Response body:
+
 `token`: Auth token to use in requests
+
 `expires`: Date when the token expires
+
 
 #### `/api/user` - PUT - auth
 Update the username/password of the user
 
 Request body:
+
 `username`: New username
+
 `password`: Optional, user's current password. Required if updating the password.
+
 `new_password`: Optional, new password for the user.
+
 
 #### `/api/user` - DELETE - auth
 Deletes the current user account and all tokens, posts, likes, etc.
@@ -79,9 +96,13 @@ Get all posts, ordered newest to oldest
 
 #### `/api/post` - POST - auth
 Create a new post
+
 Request body:
+
 `title`: Post title
+
 `body`: Post body
+
 
 #### `/api/post/<id>` - GET - auth
 Get the specified post
