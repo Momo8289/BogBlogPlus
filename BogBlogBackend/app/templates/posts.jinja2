@@ -1,0 +1,21 @@
+{% block content %}
+    {% if not posts %}
+        <h2>No posts</h2>
+    {% else %}
+    
+    <div class="row p-2 postsContainer">
+        {% for post in posts %}
+            <div class="col-md-6 mb-4">
+                <div class = "card h-100">
+                    <div class= "card-body">
+                         <h5 class="card-title">
+                         <p><a href="/post/{{ post.id }}">{{ post.title }}</a></p>
+                         </h5>
+                         <p class ="card-text">By <a href="/users/{{ post.author.username }}">{{ post.author.username }}</a></p>
+                     </div>
+                </div>
+            </div>
+        
+        {% endfor %}
+    {% endif %}
+{% endblock %}

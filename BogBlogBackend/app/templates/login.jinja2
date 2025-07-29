@@ -1,0 +1,33 @@
+{% extends "base.jinja2" %}
+{% block content %}
+<div class= "container d-flex justify-content-center align-items-center login-container">
+    <div class= "col-md-6 col-lg-4">
+         <div class="login-card">  
+            <h3 class= "text-center mb-4">Log in</h3>
+            <form method="POST" class="logIn">
+            <div class= "mb-3">
+                <label for="username" class="form-label">Username:</label>
+                <input type="text" class="form-control" required id="username" name="username">
+            </div>
+            <div class= "mb-3">
+                <label for="password" class="form-label">Password:</label>
+                <input type="password" class="form-control" required id="password" name="password">
+            </div>
+              <div class="form-check mb-3">
+                    <input type="checkbox" class="form-check-input" name="remember" id="remember">
+                    <label class="form-check-label" for="remember">
+                        Stay logged in?
+                    </label>
+                </div>
+               <br>
+                <input type="submit" class= "btn btn-info" value="Login">
+                <br>
+                <p>Don't have an account? <a href="/register">Register.</a></p>
+                {% if error %}
+                    <p style="color: red;">{{ error }}</p>
+            </div>
+        </div>
+        </div>
+        {% endif %}
+    </form>
+{% endblock %}

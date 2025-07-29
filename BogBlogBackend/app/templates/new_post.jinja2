@@ -1,0 +1,22 @@
+{% extends "base.jinja2" %}
+{% block content %}
+<div class= "container d-flex justify-content-center align-items-center login-container">
+    <div class= "col-md-6 col-lg-4">
+         <div class="newPost-card"> 
+            <h1>New post</h1>
+    <form method="POST">
+     <div class= "mb-3">
+        <label for="title">Post title:</label>
+        <input name="title" id="title" required type="text">
+        </div>
+        
+        <div class= "mb-2">
+        <label for="body">Post content:</label><br><textarea required name="body" id="body" cols="30" rows="10"></textarea>
+        </div>
+    
+        <input class ="btn btn-info" type="submit" value="Post">
+    </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

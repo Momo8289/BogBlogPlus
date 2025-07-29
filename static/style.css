@@ -1,0 +1,42 @@
+
+.card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    background-color: rgba(255, 255, 255, 0.85);
+    transition: box-shadow 0.4s ease;
+    
+}
+
+body {
+    background-color: #d9f3fd;
+
+    
+}
+.postsContainer{
+    background-image: url(SVG/LillyPads.svg);
+    background-position:bottom;
+    background-position-y: center;
+    background-repeat: no-repeat;
+}
+
+.login-container{
+
+    min-height: 70vh;
+    background-image: url(SVG/Frog.svg);
+    background-position: center;
+    background-position-y: center;
+    background-repeat: no-repeat;
+    
+}
+
+.login-card, .newPost-card {
+    background-color: rgba(255, 255, 255, 0.85);
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
+    min-width: fit-content;
+    
+}
+/*on mouse hover increase size and transparancey slightly increase shadow*/
+.login-card, .newPost-card:hover{
+    background-color: rgba(255, 255, 255, 0.95);
+}
