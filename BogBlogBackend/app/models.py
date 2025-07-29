@@ -46,8 +46,8 @@ class Post(db.Model):
 
     user_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey(User.id), index=True)
     author: so.Mapped[User] = so.relationship(back_populates="posts")
-    comments: so.WriteOnlyMapped["Comment"] = so.relationship(back_populates="post")
-    likes: so.WriteOnlyMapped["User"] = so.relationship("User", secondary="like_user_post", back_populates="likes")
+    comments: so.WriteOnlyMapped["Comment"] = so.relationship(back_populates="post", passive_deletes=True)
+    likes: so.WriteOnlyMapped["User"] = so.relationship("User", secondary="like_user_post", back_populates="likes", passive_deletes=True)
 
     def json_repr(self, viewer: User = None):
         out = {
