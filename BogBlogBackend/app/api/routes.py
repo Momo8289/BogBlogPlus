@@ -8,7 +8,8 @@ bp = Blueprint('main', __name__)
 
 @bp.route('/')
 def index():
-    return render_template("index.jinja2", posts=sorted(Post.all(), reverse=True, key=lambda p: p.created_on))
+    posts = Post.query.order_by(Post.timestamp.desc()).all()
+    return render_template("index.jinja2", posts=posts)
 
 
 @bp.route("/users/<username>")

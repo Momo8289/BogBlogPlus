@@ -1,7 +1,7 @@
 from typing import Optional
 from datetime import datetime, timezone, timedelta
 from secrets import token_hex
-
+from flask_login import UserMixin
 import sqlalchemy as sa
 import sqlalchemy.orm as so
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -9,7 +9,9 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from app import db
 
 
-class User(db.Model):
+
+
+class User(db.Model , UserMixin):
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
     username: so.Mapped[str] = so.mapped_column(sa.String(64), index=True, unique=True)
     password_hash: so.Mapped[Optional[str]] = so.mapped_column(sa.String(256))
@@ -104,3 +106,9 @@ class Like(db.Model):
     timestamp: so.Mapped[datetime] = so.mapped_column(index=True, default=lambda: datetime.now(timezone.utc))
     user_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey(User.id))
     post_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey(Post.id))
+
+from app import login
+
+@login.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
