@@ -56,7 +56,8 @@ class Post(db.Model):
             "body": self.body,
             "timestamp": self.timestamp,
             "author": self.author.json_repr(),
-            "likes": Like.query.where(Like.post_id == self.id).count()
+            "likes": Like.query.where(Like.post_id == self.id).count(),
+            "comments": Comment.query.where(Comment.post_id == self.id).count()
         }
         if viewer:
             out["liked"] = True if Like.query.where(
@@ -77,6 +78,15 @@ class Comment(db.Model):
     post_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey(Post.id), index=True)
     author: so.Mapped[User] = so.relationship(back_populates="comments")
     post: so.Mapped[Post] = so.relationship(back_populates="comments")
+
+    def json_repr(self):
+        return {
+            "id": self.id,
+            "body": self.body,
+            "timestamp": self.timestamp,
+            "author": self.author.json_repr(),
+            "post_id": self.post_id
+        }
 
     def __repr__(self):
         return f"<Comment {self.id} on post {self.post_id}>"

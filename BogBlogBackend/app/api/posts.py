@@ -4,7 +4,7 @@ from app import db
 from app.api import bp
 from app.api.errors import bad_request, forbidden
 from app.auth import protected
-from app.models import Post, User, Like
+from app.models import Post, User, Like, Comment
 
 
 @bp.get("/post")
@@ -106,3 +106,11 @@ def unlike_post(token, id):
     db.session.commit()
 
     return "", 204
+
+
+@bp.get("/post/<id>/comments")
+@protected
+def post_comments(_, id):
+    post: Post = Post.query.get_or_404(id)
+
+    return jsonify([c.json_repr() for c in db.session.scalars(post.comments.select().order_by(Comment.timestamp.desc())).all()])

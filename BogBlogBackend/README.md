@@ -116,6 +116,8 @@ Request body:
 #### `/api/post/<id>` - DELETE - auth
 Delete the specified post. Can only be done by the author.
 
+### `/api/post/<id>/comments` - GET - auth
+Get all comments on the specified post, ordered newest to oldest
 
 #### `/api/post/<id>/like` - POST - auth
 Like the specified post. Cannot be done by the post author
@@ -123,3 +125,25 @@ Like the specified post. Cannot be done by the post author
 #### `/api/post/<id>/like` - DELETE - auth
 Unlike the specified post. Cannot be done by the post author
 
+### Comments
+#### `/api/comment` - POST - auth
+Post a new comment on a post.
+
+Request body:
+
+`post_id`: ID of the post to comment on
+
+`body`: Comment body
+
+#### `/api/comment/<id>` - GET - auth
+Get the specified comment
+
+#### `/api/comment/<id>` - PUT - auth
+Edit the specified comment. Can only be done by the author
+
+Request body:
+
+`body`: New comment body
+
+#### `/api/comment/<id>` - DELETE - auth
+Delete the specified comment. Can only be done by the author
