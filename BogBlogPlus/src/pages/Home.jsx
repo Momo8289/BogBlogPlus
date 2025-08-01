@@ -6,7 +6,7 @@ function BlogPosts(){
     return(
         <div className="container">
        
-        {posts.map(post =>  <div className="card"><h3>{post.title}</h3><p key={post.title}>{post.text}</p></div>)}
+        {posts.map(post =>  <div className="card"><p key={post.id}>{post.body}</p></div>)}
         
         </div>
     )

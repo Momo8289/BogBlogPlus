@@ -3,6 +3,10 @@ import {
 } from "react-router";
 import './App.css'
 import Home, {postsLoader}from "./pages/Home.jsx";
+import Login from "./pages/Login.jsx";
+import Register from "./pages/Register.jsx";
+
+
 
 //make pages for main blog pages (all posts), blog post (singular), login, home, loading, error
 // single user blog will be main blog page with just users posts
