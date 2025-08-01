@@ -5,6 +5,8 @@ import './App.css'
 import Home, {postsLoader}from "./pages/Home.jsx";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
+import PostDetail, { postDetailLoader } from "./pages/PostDetail.jsx"; 
+import Layout from "./components/Layout.jsx";
 
 
 

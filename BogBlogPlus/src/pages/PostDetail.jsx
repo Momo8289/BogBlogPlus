@@ -1,6 +1,13 @@
 //page for individual posts
-function PostDetails(){
+export function PostDetails(){
+    return <h2>Post Details Page</h2>;
 
 }
 
-export default PostDetails;
+
+
+export function postDetailLoader(){
+return null;
+}
+
+export default postDetailLoader;
