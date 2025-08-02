@@ -14,7 +14,10 @@ export default function NavBar({title}) {
     <div className="navbar-links">
       <Link to="/">Home</Link> &nbsp; | &nbsp;
       {token && (
-        <button onClick={handleLogout}>Logout</button>)}
+      <>
+        <Link to="/new">New Post</Link> &nbsp; | &nbsp;
+        <button onClick={handleLogout}>Logout</button>
+        </>)}
       {!token &&(
         <>
           <Link to="/login">Login</Link> &nbsp; | &nbsp;

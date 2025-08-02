@@ -7,6 +7,7 @@ import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
 import PostDetails, { postDetailLoader } from "./pages/PostDetail.jsx"; 
 import Layout from "./components/Layout.jsx";
+import NewPost from "./pages/NewPost";
 
 
 
@@ -24,9 +25,11 @@ function App() {
         element: <Layout />,
         children: [
           { index: true, element: <Home />, loader: postsLoader, handle: {title:"Bog Blog"}},
-          { path: "post/:id", element: <PostDetails />, loader: postDetailLoader, handle: {title:"Post Details"}},
+          { path: "/post/:id", element: <PostDetails />, loader: postDetailLoader, handle: {title:"Post Details"}},
           {path:"/login", element: <Login/>, handle: {title: "Login"}},
-          {path:"/register", element: <Register/>, handle: {title: "Register"}}
+          {path:"/register", element: <Register/>, handle: {title: "Register"}},
+          {path:"/new", element: <NewPost />, handle: {title: "New Post"}}
+
         ],
       },
     ]);

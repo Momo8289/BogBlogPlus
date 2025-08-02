@@ -8,7 +8,7 @@ function BlogPosts(){
         <div className="blogContent">
        
         {posts.map(post =>  <div className="card " key={post.id}>
-             <Link to="/"><h4>{post.title}</h4></Link>
+             <Link to="/post/{post.id}"><h4>{post.title}</h4></Link>
              <p >By: {post.author.username}</p>
              <p>Posted on: {post.author.created_on}</p>
              </div>)}
