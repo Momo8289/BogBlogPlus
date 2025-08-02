@@ -2,6 +2,7 @@
 #root, body {
   padding: 0;
   margin: 0;
+  height: 100%;
   /* overflow: hidden; */
 }
 
@@ -38,6 +39,8 @@
   justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
+  position: relative;
+  top: 0;
   margin-top: 0;
 }
 .navbar-title{
