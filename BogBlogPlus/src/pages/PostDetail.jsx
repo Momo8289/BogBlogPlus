@@ -3,7 +3,7 @@ import { useLoaderData } from "react-router-dom";
 
 export default function PostDetails() {
   const post = useLoaderData();
-  console.log("Post inside component:", post);
+  //console.log("Post inside component:", post);
   if (!post) {
     return <p>Post not found.</p>;
   }
