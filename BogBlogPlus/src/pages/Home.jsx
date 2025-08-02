@@ -8,9 +8,9 @@ function BlogPosts(){
         <div className="blogContent">
        
         {posts.map(post =>  <div className="card " key={post.id}>
-             <Link to="/post/{post.id}"><h4>{post.title}</h4></Link>
-             <p >By: {post.author.username}</p>
-             <p>Posted on: {post.author.created_on}</p>
+             <Link to={`/post/${post.id}`}><h4>{post.title}</h4></Link>
+             <p ><strong>By:</strong> {post.author.username}</p>
+             <p><strong>Posted on:</strong> {new Date(post.author.created_on).toLocaleString()}</p>
              </div>)}
         
         </div>
