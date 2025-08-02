@@ -25,7 +25,8 @@ function App() {
         children: [
           { index: true, element: <Home />, loader: postsLoader, handle: {title:"Bog Blog"}},
           { path: "post/:id", element: <PostDetails />, loader: postDetailLoader, handle: {title:"Post Details"}},
-          {path:"/login", element: <Login/>, handle: {title: "Login"}}
+          {path:"/login", element: <Login/>, handle: {title: "Login"}},
+          {path:"/register", element: <Register/>, handle: {title: "Register"}}
         ],
       },
     ]);
