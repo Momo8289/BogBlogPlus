@@ -10,7 +10,9 @@ export default function NavBar({title}) {
 
   return (
     <nav className="navbar">
-    <h1 className="navbar-title">{title}</h1>
+        <div className="titleLink"><Link to="/" ><img className="navBarLogo" src={"/src/assets/SVG/Logo.svg"}/></Link>
+    <h1 className="navbar-title">{title}</h1></div>
+    
     <div className="navbar-links">
       <Link to="/">Home</Link> &nbsp; | &nbsp;
       {token && (

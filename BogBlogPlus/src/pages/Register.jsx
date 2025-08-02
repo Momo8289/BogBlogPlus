@@ -42,6 +42,7 @@ export default function Register() {
   return (
     <div className="registerPage">
     <div className="auth-container">
+        <img src={"/src/assets/SVG/Logo.svg"}/>
       <h2>Register</h2>
       <form onSubmit={handleRegister}>
         <label htmlFor="username">Username</label>

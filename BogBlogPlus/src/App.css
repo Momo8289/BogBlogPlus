@@ -36,6 +36,21 @@ body {
   transform: translateY(-4px);
   background-color: rgba(255, 255, 255, 0.85);
 }
+
+/* navbar */
+.navBarLogo{
+  height:50px;
+  width: 50px;
+  margin: 0;
+  padding: 0;
+}
+
+.titleLink{
+  display:flex;
+  flex-direction: row;
+  justify-content: baseline;
+}
+
 .navbar {
   width: 100vw;
   padding: 1rem 2rem;
@@ -47,9 +62,12 @@ body {
   position: relative;
   top: 0;
   margin-top: 0;
+  margin-bottom: 0;
 }
 .navbar-title{
   color: black;
+  margin-top: 10px;
+  margin-left: 5px;;
 }
 
 
@@ -70,14 +88,15 @@ body {
   height: 100vh;
   justify-content: center;
   align-items: center;
-  background: #f8f9fa;
-  background-image: url("./assets/SVG/Frog.svg");
+  background-image: url("./assets/SVG/background.svg");
   background-repeat: no-repeat;
+  background-size: cover;
   background-position: center;
+  
 }
 
 .login-card {
-  background: white;
+  background: rgba(180, 179, 179, 0.48);
   padding: 2rem 3rem;
   border-radius: 10px;
   box-shadow: 0 4px 16px rgba(0,0,0,0.1);
@@ -106,7 +125,7 @@ body {
 }
 
 .login-card button {
-  background-color: #1976d2;
+  background-color: #4e8f74;
   color: white;
   padding: 0.75rem;
   border: none;
@@ -116,7 +135,7 @@ body {
 }
 
 .login-card button:hover {
-  background-color: #1565c0;
+  background-color: #58a585;
 }
 
 .error {
@@ -127,14 +146,12 @@ body {
 /* register page */
 .auth-container {
   max-width: 400px;
-  margin: 4rem auto;
   padding: 2rem;
   border: 1px solid #ccc;
   border-radius: 8px;
-  background-color: #fafafa;
-  
+  background: rgba(180, 179, 179, 0.48);
+  margin: 0;
 }
-
 .auth-container h2 {
   margin-bottom: 1rem;
 }
@@ -145,19 +162,26 @@ body {
 }
 
 .auth-container input {
-  width: 100%;
   padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 100%;
   margin-bottom: 1rem;
 }
 
 .auth-container button {
   width: 100%;
   padding: 0.75rem;
-  background-color: #1976d2;
+  background-color: #4e8f74;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+}
+
+.auth-container button:hover {
+  background-color: #58a585;
 }
 
 .auth-container .error {
@@ -166,10 +190,13 @@ body {
 }
 
 .registerPage{
-  width: 100%;
-  height:100vh;
-  background-image: url("./assets/SVG/Frog.svg");
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  background-image: url("./assets/SVG/background.svg");
   background-repeat: no-repeat;
+  background-size: cover;
   background-position: center;
 }
 
