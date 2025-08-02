@@ -1,4 +1,4 @@
-/* Reset default browser styles */
+
 * {
   margin: 0;
   padding: 0;
@@ -10,4 +10,20 @@ html, body {
   width: 100%;
   font-family: sans-serif;
   background-color: #f4f4f4; /* optional */
+}
+
+button{
+  background-color: aquamarine;
+  border-radius: 3.5px;
+  padding: 5px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgb(64, 143, 117);
+}
+button:hover{
+  background-color: rgb(196, 255, 235);
+  border-color: rgb(196, 255, 235);
+}
+button:active{
+  background-color: rgb(64, 143, 117);
 }
