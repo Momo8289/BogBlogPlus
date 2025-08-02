@@ -10,18 +10,18 @@ export default function NavBar({title}) {
 
   return (
     <nav className="navbar">
-        <h1>{title}</h1>
-      <Link to="/">Home</Link>
-      {token ? (
+    <h1 className="navbar-title">{title}</h1>
+    <div className="navbar-links">
+      <Link to="/">Home</Link> &nbsp; | &nbsp;
+      {token && (
+        <button onClick={handleLogout}>Logout</button>)}
+      {!token &&(
         <>
-          <button onClick={handleLogout}>Logout</button>
-        </>
-      ) : (
-        <>
-          <Link to="/login">Login</Link>
+          <Link to="/login">Login</Link> &nbsp; | &nbsp;
           <Link to="/register">Register</Link>
-        </>
-      )}
-    </nav>
-  );
+        </>)}
+      )
+    </div>
+  </nav>
+);
 }

@@ -5,7 +5,7 @@ import './App.css'
 import Home, {postsLoader}from "./pages/Home.jsx";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
-import PostDetail, { postDetailLoader } from "./pages/PostDetail.jsx"; 
+import PostDetails, { postDetailLoader } from "./pages/PostDetail.jsx"; 
 import Layout from "./components/Layout.jsx";
 
 
@@ -19,12 +19,15 @@ import Layout from "./components/Layout.jsx";
 
 function App() {
     const router = createBrowserRouter([
-
+        //handle will contain the value passed into the navbar for the title generation
         {path: "/",
-         element: <Home/>,
-         loader: postsLoader
-        }
-    ])
+        element: <Layout />,
+        children: [
+          { index: true, element: <Home />, loader: postsLoader, handle: {title:"Bog Blog"}},
+          { path: "post/:id", element: <PostDetails />, loader: postDetailLoader, handle: {title:"Post Details"}},
+        ],
+      },
+    ]);
 
         return (
         <>

@@ -1,14 +1,14 @@
-import {useLoaderData} from 'react-router'
-import NavBar from '../components/NavBar';
+import {Link, useLoaderData} from 'react-router-dom'
+
 
 function BlogPosts(){
     const posts = useLoaderData();
     
     return(
-        <div className="container">
+        <div className="blogContent">
        
         {posts.map(post =>  <div className="card " key={post.id}>
-             <h4>{post.title}</h4>
+             <Link to="/"><h4>{post.title}</h4></Link>
              <p >By: {post.author.username}</p>
              <p>Posted on: {post.author.created_on}</p>
              </div>)}
@@ -19,13 +19,7 @@ function BlogPosts(){
 
 export default function Home() {
     return (
-        <>
-            <NavBar title = "Home"/>
-            <div classname="BlogPosts">
                 <BlogPosts />
-                </div>
-           
-        </>
     )
 }
 
