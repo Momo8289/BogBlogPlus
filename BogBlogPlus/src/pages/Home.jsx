@@ -1,4 +1,5 @@
 import {useLoaderData} from 'react-router'
+import NavBar from '../components/NavBar';
 
 function BlogPosts(){
     const posts = useLoaderData();
@@ -6,7 +7,11 @@ function BlogPosts(){
     return(
         <div className="container">
        
-        {posts.map(post =>  <div className="card"><p key={post.id}>{post.body}</p></div>)}
+        {posts.map(post =>  <div className="card " key={post.id}>
+             <h4>{post.title}</h4>
+             <p >By: {post.author.username}</p>
+             <p>Posted on: {post.author.created_on}</p>
+             </div>)}
         
         </div>
     )
@@ -15,8 +20,11 @@ function BlogPosts(){
 export default function Home() {
     return (
         <>
-            <h1>Home</h1>
-           <BlogPosts />
+            <NavBar title = "Home"/>
+            <div classname="BlogPosts">
+                <BlogPosts />
+                </div>
+           
         </>
     )
 }

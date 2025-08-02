@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function NavBar() {
+export default function NavBar({title}) {
   const token = localStorage.getItem("token");
 
   const handleLogout = () => {
@@ -10,6 +10,7 @@ export default function NavBar() {
 
   return (
     <nav className="navbar">
+        <h1>{title}</h1>
       <Link to="/">Home</Link>
       {token ? (
         <>
