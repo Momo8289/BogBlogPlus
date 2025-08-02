@@ -6,6 +6,7 @@ export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+  
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
@@ -23,9 +24,28 @@ export default function Login() {
       setError(data.message || "Login failed");
     } else {
       localStorage.setItem("token", data.token);
-      navigate("/"); // go home
-    }
-  };
+      try {
+        const userRes = await fetch("http://127.0.0.1:5055/api/user", {
+          headers: {
+            Authorization: `Bearer ${data.token}`,
+          },
+        });
+    
+        const userData = await userRes.json();
+    
+        if (!userRes.ok) throw new Error("Failed to fetch user info");
+    
+       
+        localStorage.setItem("userId", userData.id);
+        localStorage.setItem("username", userData.username); 
+        navigate("/");
+    
+      } catch (err) {
+        console.error("User fetch error:", err);
+        setError("Login succeeded but failed to load user info.");
+      }
+    };
+}
 
   return (
     <div className="login-wrapper">

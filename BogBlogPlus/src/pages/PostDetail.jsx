@@ -1,5 +1,6 @@
 //page for individual posts
 import { useLoaderData } from "react-router-dom";
+import DeletePost from "../components/DeletePost";
 
 export default function PostDetails() {
   const post = useLoaderData();
@@ -7,6 +8,7 @@ export default function PostDetails() {
   if (!post) {
     return <p>Post not found.</p>;
   }
+  console.log(post.author.id , Number(localStorage.getItem("userId")));
 
   return (
     <div className="post-details">
@@ -16,6 +18,8 @@ export default function PostDetails() {
       <p><strong>Posted on:</strong> {new Date(post.author.created_on).toLocaleString()}</p>
       <br></br>
       <div>{post.body}</div>
+      <br></br>
+      {post.author.id === Number(localStorage.getItem("userId")) && (<DeletePost postId={post.id} />)}
     </div>
   );
 }
