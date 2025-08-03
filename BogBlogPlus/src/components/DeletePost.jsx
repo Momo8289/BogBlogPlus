@@ -1,5 +1,6 @@
 
 import { useNavigate } from "react-router-dom";
+import {deletePost} from "../utils/api.js";
 
 function DeletePost({ postId }) {
     const navigate = useNavigate();
@@ -12,15 +13,9 @@ function DeletePost({ postId }) {
         }
 
         try {
-            const response = await fetch(`http://127.0.0.1:5055/api/post/${postId}`, {
-                method: 'DELETE',
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
+            const {response, data} = await deletePost(token, postId);
 
             if (!response.ok) {
-                const data = await response.json();
                 console.error("Failed to delete post:", data.message || response.statusText);
                 return;
             }

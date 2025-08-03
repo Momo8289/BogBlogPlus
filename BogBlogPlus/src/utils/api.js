@@ -39,8 +39,15 @@ const apiRequest = async (url, method, body = null, token = null) => {
                 throw new ApiError(message)
         }
     }
-
-    return {data: await response.json(), response}
+    let json
+    try {
+        json = await response.json()
+    } catch (err) {
+        if(!(err instanceof SyntaxError)) {
+            throw err
+        }
+    }
+    return {data: json || {}, response}
 }
 
 // Tokens
