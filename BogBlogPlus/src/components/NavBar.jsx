@@ -16,6 +16,7 @@ export default function NavBar({title}) {
       {token && (
       <>
         <Link to="/new">New Post</Link> &nbsp; | &nbsp;
+        Logged in as {localStorage.getItem("username")} &nbsp;
         <button onClick={handleLogout}>Logout</button>
         </>)}
       {!token &&(
