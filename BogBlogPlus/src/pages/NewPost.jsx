@@ -1,66 +1,61 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import {useState} from "react";
+import {useNavigate} from "react-router-dom";
+import {ApiError, createPost} from "../utils/api.js";
 
 export default function NewPost() {
-  const navigate = useNavigate();
-  const [title, setTitle] = useState("");
-  const [body, setBody] = useState("");
-  const [error, setError] = useState("");
+    const navigate = useNavigate();
+    const [title, setTitle] = useState("");
+    const [body, setBody] = useState("");
+    const [error, setError] = useState("");
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
-    const token = localStorage.getItem("token");
-    if (!token) {
-      setError("You must be logged in to create a post.");
-      return;
-    }
+        const token = localStorage.getItem("token");
+        if (!token) {
+            setError("You must be logged in to create a post.");
+            return;
+        }
+        try {
+            await createPost(token, title, body)
+            navigate("/"); // redirect to home
 
-    const response = await fetch("http://127.0.0.1:5055/api/post", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({ title, body }),
-    });
+        } catch (err) {
+            if(err instanceof ApiError) {
+                setError("Failed to create post.");
+            } else {
+                throw err;
+            }
+        }
+    };
 
-    const data = await response.json();
+    return (
+        <div className="new-post-container">
+            {error && <p style={{color: "red"}}>{error}</p>}
 
-    if (response.ok) {
-      navigate("/"); // redirect to home
-    } else {
-      setError(data.message || "Failed to create post.");
-    }
-  };
+            <form onSubmit={handleSubmit} className="post-form">
+                <div>
+                    <label>Title:</label><br/>
+                    <input
+                        type="text"
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                        required
+                    />
+                </div>
 
-  return (
-    <div className="new-post-container">
-      {error && <p style={{ color: "red" }}>{error}</p>}
+                <div>
+                    <label>Content:</label><br/>
+                    <textarea
+                        rows="6"
+                        value={body}
+                        onChange={(e) => setBody(e.target.value)}
+                        required
+                    />
+                </div>
 
-      <form onSubmit={handleSubmit} className="post-form">
-        <div>
-          <label>Title:</label><br />
-          <input
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            required
-          />
+                <button type="submit">Post</button>
+            </form>
         </div>
-
-        <div>
-          <label>Content:</label><br />
-          <textarea
-            rows="6"
-            value={body}
-            onChange={(e) => setBody(e.target.value)}
-            required
-          />
-        </div>
-
-        <button type="submit">Post</button>
-      </form>
-    </div>
-  );
+    );
 }
