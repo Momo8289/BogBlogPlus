@@ -8,18 +8,35 @@ body {
   /* overflow: hidden; */
 }
 
-.blogContent{
+.homePage {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(to bottom,#e3f2fd 0%, #a9d6cc 50%, #98b68c 100%);
+}
+
+.lilypad-background {
+  position: absolute;
+  inset: 0;
+  background-image: url("./assets/SVG/LillyPads.svg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+  z-index: 0;
+  pointer-events: none; /* allows clicks to go through */
+  opacity: 0.8;
+}
+
+.blogContent {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1.5rem;
   padding: 2rem;
   max-width: 1200px;
   margin: 0 auto;
-  background-image: url("./assets/SVG/LillyPads.svg");
-  background-repeat: no-repeat;
-  background-position-y: center;
-  background-position-x: center;
-} 
+}
+
 
 .card{
   border: 1px solid #ddd;
@@ -226,7 +243,13 @@ body {
   position: relative;
   height: 100vh;
   width: 100%;
-  background: linear-gradient(to bottom, #c6f4ff, #648557);
+  background: linear-gradient(
+    to bottom,  
+    #e3f2fd 0%,      
+    #c6f4ff 15%,      
+    #A1BA71 50%,     
+    #648557 100%      
+  );
   overflow: hidden;
 }
 

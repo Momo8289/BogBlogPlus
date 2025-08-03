@@ -1,4 +1,5 @@
 import {Link, useLoaderData} from 'react-router-dom'
+import {motion} from 'framer-motion';
 
 
 function BlogPosts(){
@@ -19,8 +20,15 @@ function BlogPosts(){
 
 export default function Home() {
     return (
-                <BlogPosts />
-    )
+      <div className="homePage">
+        <motion.div
+        className="lilypad-background"
+        animate={{ y: [0, 10, 0] }}
+        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <BlogPosts />
+    </div>
+  );
 }
 
 //fetch and load data
