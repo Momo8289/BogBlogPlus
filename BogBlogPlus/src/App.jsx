@@ -2,10 +2,10 @@ import {
     createBrowserRouter, RouterProvider
 } from "react-router-dom";
 import './App.css'
-import Home, {postsLoader}from "./pages/Home.jsx";
+import Home, {PostsLoader}from "./pages/Home.jsx";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
-import PostDetails, { postDetailLoader } from "./pages/PostDetail.jsx"; 
+import PostDetails, { PostDetailLoader } from "./pages/PostDetail.jsx";
 import Layout from "./components/Layout.jsx";
 import NewPost from "./pages/NewPost";
 import UserPageHome, {UserPostDetailLoader} from "./pages/UserPage";
@@ -25,8 +25,8 @@ function App() {
         {path: "/",
         element: <Layout />,
         children: [
-          { index: true, element: <Home />, loader: postsLoader, handle: {title:"Bog Blog"}},
-          { path: "/post/:id", element: <PostDetails />, loader: postDetailLoader, handle: {title:"Post Details"}},
+          { index: true, element: <Home />, loader: PostsLoader, handle: {title:"Bog Blog"}},
+          { path: "/post/:id", element: <PostDetails />, loader: PostDetailLoader, handle: {title:"Post Details"}},
           {path:"/login", element: <Login/>, handle: {title: "Login"}},
           {path:"/register", element: <Register/>, handle: {title: "Register"}},
           {path:"/new", element: <NewPost />, handle: {title: "New Post"}},
