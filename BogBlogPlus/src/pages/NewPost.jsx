@@ -35,6 +35,7 @@ export default function NewPost() {
   };
 
   return (
+    <div className="newPostPage">
     <div className="new-post-container">
       {error && <p style={{ color: "red" }}>{error}</p>}
 
@@ -61,6 +62,7 @@ export default function NewPost() {
 
         <button type="submit">Post</button>
       </form>
+    </div>
     </div>
   );
 }
