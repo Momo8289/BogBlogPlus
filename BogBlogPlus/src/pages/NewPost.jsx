@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import bannerUrl from '/src/assets/SVG/banner.svg';
 
 export default function NewPost() {
   const navigate = useNavigate();
@@ -63,6 +65,15 @@ export default function NewPost() {
         <button type="submit">Post</button>
       </form>
     </div>
+    <motion.img
+  src={bannerUrl}
+  alt="Banner"
+  className="svg-banner"
+  initial={{ opacity: 0, y: 50 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 1 }}
+/>
+
     </div>
   );
 }
