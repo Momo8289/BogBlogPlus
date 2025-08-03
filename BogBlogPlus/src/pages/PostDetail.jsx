@@ -2,10 +2,10 @@
 import {useLoaderData} from "react-router-dom";
 import DeletePost from "../components/DeletePost";
 import {getPost} from "../utils/api.js";
+import LikeButton from "../components/LikeButton.jsx";
 
 export default function PostDetails() {
     const post = useLoaderData();
-    //console.log("Post inside component:", post);
     if (!post) {
         return <p>Post not found.</p>;
     }
@@ -20,7 +20,11 @@ export default function PostDetails() {
             <br></br>
             <div>{post.body}</div>
             <br></br>
-            {post.author.id === Number(localStorage.getItem("userId")) && (<DeletePost postId={post.id}/>)}
+            {post.author.id === Number(localStorage.getItem("userId")) ?
+                <DeletePost postId={post.id}/>
+                :
+                <LikeButton postId={post.id} liked={post.liked} likes={post.likes} />
+            }
         </div>
     );
 }

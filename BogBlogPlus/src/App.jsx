@@ -2,14 +2,13 @@ import {
     createBrowserRouter, RouterProvider
 } from "react-router-dom";
 import './App.css'
-import Home, {PostsLoader}from "./pages/Home.jsx";
+import Home, {PostsLoader} from "./pages/Home.jsx";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
-import PostDetails, { PostDetailLoader } from "./pages/PostDetail.jsx";
+import PostDetails, {PostDetailLoader} from "./pages/PostDetail.jsx";
 import Layout from "./components/Layout.jsx";
 import NewPost from "./pages/NewPost";
-import UserPageHome, {UserPostDetailLoader} from "./pages/UserPage";
-
+import UserPageHome, {UserLikedPostLoader, UserPostDetailLoader} from "./pages/UserPage";
 
 
 //make pages for main blog pages (all posts), blog post (singular), login, home, loading, error
@@ -22,21 +21,32 @@ import UserPageHome, {UserPostDetailLoader} from "./pages/UserPage";
 function App() {
     const router = createBrowserRouter([
         //handle will contain the value passed into the navbar for the title generation
-        {path: "/",
-        element: <Layout />,
-        children: [
-          { index: true, element: <Home />, loader: PostsLoader, handle: {title:"Bog Blog"}},
-          { path: "/post/:id", element: <PostDetails />, loader: PostDetailLoader, handle: {title:"Post Details"}},
-          {path:"/login", element: <Login/>, handle: {title: "Login"}},
-          {path:"/register", element: <Register/>, handle: {title: "Register"}},
-          {path:"/new", element: <NewPost />, handle: {title: "New Post"}},
-          {path:"/user/:id/posts", element: <UserPageHome />,   loader: UserPostDetailLoader,handle:{title :"User Posts"}}
-
-        ],
-      },
+        {
+            path: "/",
+            element: <Layout/>,
+            children: [
+                {index: true, element: <Home/>, loader: PostsLoader, handle: {title: "Bog Blog"}},
+                {path: "/post/:id", element: <PostDetails/>, loader: PostDetailLoader, handle: {title: "Post Details"}},
+                {path: "/login", element: <Login/>, handle: {title: "Login"}},
+                {path: "/register", element: <Register/>, handle: {title: "Register"}},
+                {path: "/new", element: <NewPost/>, handle: {title: "New Post"}},
+                {
+                    path: "/user/:id/posts",
+                    element: <UserPageHome/>,
+                    loader: UserPostDetailLoader,
+                    handle: {title: "User Posts"}
+                },
+                {
+                    path: "/user/:id/likes",
+                    element: <UserPageHome/>,
+                    loader: UserLikedPostLoader,
+                    handle: {title: "User Likes"}
+                }
+            ],
+        },
     ]);
 
-        return (
+    return (
         <>
             <RouterProvider router={router}/>
         </>
