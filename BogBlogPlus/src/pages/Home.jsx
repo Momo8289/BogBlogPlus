@@ -1,20 +1,13 @@
-import {Link, useLoaderData} from 'react-router-dom'
+import {useLoaderData} from 'react-router-dom'
 import {getPosts} from "../utils/api.js";
+import Posts from "../components/Posts.jsx";
 
 
 function BlogPosts() {
     const posts = useLoaderData();
 
     return (
-        <div className="blogContent">
-
-            {posts.map(post => <div className="card " key={post.id}>
-                <Link to={`/post/${post.id}`}><h4>{post.title}</h4></Link>
-                <p><strong>By:</strong> <Link to={`/user/${post.author.id}/posts`}>{post.author.username}</Link></p>
-                <p><strong>Posted on:</strong> {new Date(post.timestamp).toLocaleString()}</p>
-            </div>)}
-
-        </div>
+        <Posts posts={posts} />
     )
 }
 
