@@ -19,7 +19,7 @@ return(
 function UserPageHome(){
    return <UserPage />
 }
-export async function userPostDetailLoader({ params }) {
+export async function UserPostDetailLoader({ params }) {
     const token = localStorage.getItem("token");
     if (!token) return [];
   
