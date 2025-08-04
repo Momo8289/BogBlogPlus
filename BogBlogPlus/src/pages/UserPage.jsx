@@ -1,4 +1,6 @@
+import { motion } from "framer-motion";
 import { Link, useLoaderData } from "react-router-dom";
+
 
 function UserPage(){
     const userPosts = useLoaderData();
@@ -17,7 +19,19 @@ return(
 
 }
 function UserPageHome(){
-   return <UserPage />
+ 
+  return(
+ <div className="userPage">
+      <motion.div
+        className="lilypad-background"
+        animate={{ y: [0, 10, 0] }}
+        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+      />
+    <UserPage />
+     
+     </div>
+  );
+  
 }
 export async function userPostDetailLoader({ params }) {
     const token = localStorage.getItem("token");
