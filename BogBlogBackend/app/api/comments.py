@@ -22,7 +22,7 @@ def new_comment(token):
     if not (post := Post.query.get_or_404(post_id)):
         return not_found("Post not found")
 
-    comment = Comment(author=user, body=body, post=post)
+    comment = Comment(author=user, body=body, post=post, user_id=user.id)
 
     db.session.add(comment)
     db.session.commit()

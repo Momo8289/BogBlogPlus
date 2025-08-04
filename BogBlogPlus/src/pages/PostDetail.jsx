@@ -1,18 +1,32 @@
 //page for individual posts
-import {useLoaderData} from "react-router-dom";
+import {useLoaderData, useNavigate} from "react-router-dom";
 import DeletePost from "../components/DeletePost";
 import {getPost} from "../utils/api.js";
 import LikeButton from "../components/LikeButton.jsx";
+import CommentSection from "../components/CommentSection.jsx";
 
 export default function PostDetails() {
     const post = useLoaderData();
+    const navigate = useNavigate();
+    const token = localStorage.getItem("token");
+    const currentUserId = Number(localStorage.getItem("userId"));
+
     if (!post) {
         return <p>Post not found.</p>;
     }
     console.log(post.author.id, Number(localStorage.getItem("userId")));
 
+    const handleGoBack = () => {
+        navigate(-1); // takes the user back to the previous page
+    };
+
     return (
         <div className="post-details">
+
+            <button onClick={handleGoBack} className="back-button">
+                ← Back
+            </button>
+
             <h2>{post.title}</h2>
             <br></br>
             <p><strong>By:</strong> {post.author.username}</p>
@@ -25,6 +39,13 @@ export default function PostDetails() {
                 :
                 <LikeButton postId={post.id} liked={post.liked} likes={post.likes} />
             }
+
+            <CommentSection 
+                postId={post.id} 
+                token={token}
+                currentUserId={currentUserId}
+                isExpanded={true} 
+            />
         </div>
     );
 }
