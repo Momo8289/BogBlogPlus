@@ -44,9 +44,9 @@ export async function userPostDetailLoader({ params }) {
     const data = await response.json();
     if (!response.ok) return [];
   
-    console.log("Loader received from API:", data); // ✅ THIS SHOWS 8 posts
+    console.log("Loader received from API:", data); 
   
-    return data; // ✅ RETURNING JUST posts
+    return data; 
   }
   
   
