@@ -4,6 +4,7 @@ import DeletePost from "../components/DeletePost";
 import bannerUrl from '/src/assets/SVG/banner.svg';
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { getPost } from "../utils/api";
 
 export default function PostDetails() {
   const post = useLoaderData();
@@ -11,7 +12,7 @@ export default function PostDetails() {
   if (!post) {
     return <p>Post not found.</p>;
   }
-  console.log(post.author.id , Number(localStorage.getItem("userId")));
+ // console.log(post.author.id , Number(localStorage.getItem("userId")));
 
   return (
     <>
@@ -44,16 +45,13 @@ export default function PostDetails() {
 export async function postDetailLoader({params}){
     
     const token = localStorage.getItem("token");
+    const id = params.id;
   
-    const response = await fetch(`http://127.0.0.1:5055/api/post/${params.id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const response = await getPost(token, id );
   
-    const data = await response.json();
-    console.log("Fetched post:", data);
-    if (!response.ok) {
+    const data = await response
+   // console.log("Fetched post:", data);
+    if (!response) {
       throw new Error(data.message || "Failed to fetch post.");
     }
   

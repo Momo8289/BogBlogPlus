@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import bannerUrl from '/src/assets/SVG/banner.svg';
+import { createPost } from "../utils/api";
 
 export default function NewPost() {
   const navigate = useNavigate();
@@ -18,19 +19,12 @@ export default function NewPost() {
       return;
     }
 
-    const response = await fetch("http://127.0.0.1:5055/api/post", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({ title, body }),
-    });
+    const response = await createPost(token, title, body)
+    
+    const data = await response;
 
-    const data = await response.json();
-
-    if (response.ok) {
-      navigate("/"); // redirect to home
+    if (response) {
+      navigate("/"); 
     } else {
       setError(data.message || "Failed to create post.");
     }

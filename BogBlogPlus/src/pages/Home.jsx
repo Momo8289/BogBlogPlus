@@ -1,5 +1,6 @@
 import {Link, useLoaderData} from 'react-router-dom'
 import {motion} from 'framer-motion';
+import { getPosts } from '../utils/api';
 
 
 function BlogPosts(){
@@ -39,15 +40,11 @@ export async function postsLoader() {
         return [];
       }
   
-    const response = await fetch("http://127.0.0.1:5055/api/post", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const response = getPosts(token);
   
-    const data = await response.json(); 
+    const data = await response; 
   
-    if (!response.ok) {
+    if (!response) {
       console.error("Fetch failed:", data);
       return [];
     }
