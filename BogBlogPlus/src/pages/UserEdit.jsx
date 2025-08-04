@@ -76,9 +76,10 @@ return(
         
        
         <div className="accountInfoCard ">
-         <h3>Username: {user.username}</h3>
-         <br></br>
+         <h3>Username:  &nbsp;{user.username}</h3>
+         <br></br><br></br>
          <h5>Member since: {new Date(user.created_on).toLocaleString()}</h5>
+         <br></br>
          <h5>Number of Bog Blog Posts: {posts.length}</h5>
         </div>
     </div>
