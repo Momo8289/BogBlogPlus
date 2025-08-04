@@ -17,9 +17,10 @@ return(
         
          <div className="accountInfoDisplay">
         
-        <h2>Account Information</h2>
-        <div className="accountInfoCard">
-         <h4>Username: {user.username}</h4>
+       
+        <div className="accountInfoCard ">
+         <h3>Username: {user.username}</h3>
+         <br></br>
          <h5>Member since: {new Date(user.created_on).toLocaleString()}</h5>
          <h5>Number of Bog Blog Posts: {posts.length}</h5>
         </div>
@@ -27,20 +28,23 @@ return(
     <div className="editAccount">
        <form>
         <h3>Edit Account</h3>
-        <label>New Username</label>
+        <br></br>
+        <label>New Username: </label>
         <input
           type="text"
         defaultValue={user.username}
           onChange={(e) => setUsername(e.target.value)}
           required
         />
-        <label>Password</label>
+        <br></br>
+        <label>Password: </label>
         <input
           type="password"
         //   value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
         />
+        <button>Save Changes</button>
         </form>
     </div>
     </div>

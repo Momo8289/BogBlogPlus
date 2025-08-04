@@ -324,3 +324,18 @@ body {
   background: rgba(180, 179, 179, 0.48);
   margin: 0;
 }
+
+.editAccount{
+  max-width: 400px;
+  padding: 2rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: rgba(136, 135, 135, 0.48);
+  margin: 0;
+}
+
+.accountContainer{
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+}
