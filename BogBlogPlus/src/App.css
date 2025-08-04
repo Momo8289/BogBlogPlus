@@ -315,3 +315,12 @@ body {
   border-radius: 3%;
   
 }
+
+.accountInfoCard{
+  max-width: 400px;
+  padding: 2rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: rgba(180, 179, 179, 0.48);
+  margin: 0;
+}

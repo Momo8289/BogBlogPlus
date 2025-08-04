@@ -1,30 +1,36 @@
-import { currentUser, updateUser } from "../utils/api";
+import { currentUser, updateUser, getUserPosts } from "../utils/api";
 import Frog from'../assets/SVG/Frog.svg';
 import {motion} from 'framer-motion'
 import { useLoaderData } from "react-router";
 
 function UserEdit(){
-const user = useLoaderData();
+const { user, posts } = useLoaderData();
+
+
 
 
 return(
     <>
  <div className="accountPage">
-    
+
     <div className="accountContainer">
         
          <div className="accountInfoDisplay">
         
-        <p>account information here</p>
-     {/* display current user name, time account created, number of posts, comments and likes */}
-
+        <h2>Account Information</h2>
+        <div className="accountInfoCard">
+         <h4>Username: {user.username}</h4>
+         <h5>Member since: {new Date(user.created_on).toLocaleString()}</h5>
+         <h5>Number of Bog Blog Posts: {posts.length}</h5>
+        </div>
     </div>
     <div className="editAccount">
        <form>
-        <label>Username</label>
+        <h3>Edit Account</h3>
+        <label>New Username</label>
         <input
           type="text"
-        //   defaultValue={user.username}
+        defaultValue={user.username}
           onChange={(e) => setUsername(e.target.value)}
           required
         />
@@ -54,10 +60,20 @@ return(
 )
 }
 
-export function userDetailLoader(){
+export async function userDetailLoader(){
     const token = localStorage.getItem("token");
 
-    const response = currentUser(token)
+    if (!token) throw new Error("No token");
+  
+    const user = await currentUser(token);
+  
+    if (!user || !user.id) throw new Error("User not found");
+  
+    const posts = await getUserPosts(token, user.id);
+
+    return { user: await user,
+        posts: await posts,
+      };//LikeInfo, CommentInfo
 
 }
 

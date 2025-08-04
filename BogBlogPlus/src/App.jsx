@@ -10,7 +10,7 @@ import Layout from "./components/Layout.jsx";
 import NewPost from "./pages/NewPost";
 import UserPageHome, {userPostDetailLoader} from "./pages/UserPage";
 import EditPost from "./pages/EditPost";
-import UserEdit from "./pages/UserEdit";
+import UserEdit, {userDetailLoader} from "./pages/UserEdit";
 
 
 
@@ -34,7 +34,7 @@ function App() {
           {path:"/new", element: <NewPost />, handle: {title: "New Post"}},
           {path:"/user/:id/posts", element: <UserPageHome />,   loader: userPostDetailLoader,handle:{title :"User Posts"}},
           {path:"/post/:id/edit", element: <EditPost />, loader: postDetailLoader, handle: {title:"Edit Post"}}, 
-          {path:"/user/:id/account", element: <UserEdit />, handler: {title: "Edit User Information"}}
+          {path:"/user/:id/account", element: <UserEdit />,loader:userDetailLoader, handle: {title: "Edit User Information"}}
         ],
       },
     ]);
