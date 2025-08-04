@@ -4,6 +4,7 @@ import {motion} from 'framer-motion'
 import { useState } from "react";
 import { useLoaderData } from "react-router";
 import { useNavigate } from "react-router-dom";
+import AccountPageArt from "../components/AccountPageArt";
 
 function UserEdit(){
 const navigate = useNavigate();
@@ -141,11 +142,16 @@ return(
    
     
     <div className="accountArt">
-        <div className="frameForFrog">
+        <motion.div className="frameForFrog"
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+        >
             <div className="accountFrog">
-                    <img src={Frog} />
+                   <AccountPageArt />
             </div>
-        </div>
+       
+        </motion.div>
     </div>
     
  </div>
