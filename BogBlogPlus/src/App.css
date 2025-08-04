@@ -107,9 +107,22 @@ body {
   max-width: 800px;
   margin: 2rem auto;
   padding: 2rem;
-  background-color: white;
+  background-color: rgba(253, 250, 250, 0.48);
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.postDetailPage{
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  background: linear-gradient(
+    to bottom,  
+    #e3f2fd 0%,      
+    #c6f4ff 15%,      
+    #A1BA71 50%,     
+    #648557 100%      
+  );
+  overflow: hidden;
 }
 
 /* login page */
@@ -274,3 +287,7 @@ body {
 .post-form button:hover { 
   background-color: #58a585;
 }
+
+
+
+

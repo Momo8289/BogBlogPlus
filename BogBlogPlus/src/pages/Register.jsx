@@ -1,6 +1,7 @@
 //registration page
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import LogoSVG from "../components/FloatingLogo";
 
 export default function Register() {
   const [username, setUsername] = useState("");
@@ -42,7 +43,9 @@ export default function Register() {
   return (
     <div className="registerPage">
     <div className="auth-container">
-        <img src={"/src/assets/SVG/Logo.svg"}/>
+    <div style={{ position: "relative" }}>
+      <LogoSVG />
+       </div>
       <h2>Register</h2>
       <form onSubmit={handleRegister}>
         <label htmlFor="username">Username</label>

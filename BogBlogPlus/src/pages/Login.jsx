@@ -1,6 +1,7 @@
 //login page
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import LogoSVG from "../components/FloatingLogo";
 
 export default function Login() {
   const [username, setUsername] = useState("");
@@ -50,7 +51,9 @@ export default function Login() {
   return (
     <div className="login-wrapper">
       <form onSubmit={handleLogin} className="login-card">
-      <img src={"/src/assets/SVG/Logo.svg"}/>
+      <div style={{ position: "relative" }}>
+      <LogoSVG />
+       </div>
         <h2>Login</h2>
         {error && <p className="error">{error}</p>}
         <label>Username</label>
