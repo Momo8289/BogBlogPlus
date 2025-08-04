@@ -1,12 +1,19 @@
+
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { getUser } from "../utils/api";
 
 export default function NavBar({title}) {
   const token = localStorage.getItem("token");
+  const id = localStorage.getItem("userId");
+
 
   const handleLogout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("userId");
     window.location.href = "/login";
   };
+  
 
   return (
     <nav className="navbar">
@@ -17,7 +24,9 @@ export default function NavBar({title}) {
       <Link to="/">Home</Link> &nbsp; | &nbsp;
       {token && (
       <>
+        <Link to= {`/user/${id}/posts`}>My Posts</Link> &nbsp; | &nbsp;
         <Link to="/new">New Post</Link> &nbsp; | &nbsp;
+        <Link to={`/user/${id}/account`}>My Account</Link> &nbsp; | &nbsp;
         <button onClick={handleLogout}>Logout</button>
         </>)}
       {!token &&(
