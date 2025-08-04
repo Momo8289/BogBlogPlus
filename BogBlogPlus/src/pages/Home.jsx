@@ -1,11 +1,24 @@
 import {Link, useLoaderData} from 'react-router-dom'
 import {motion} from 'framer-motion';
 import { getPosts } from '../utils/api';
-
+import Logo from '../assets/SVG/Logo.svg'
 
 function BlogPosts(){
     const posts = useLoaderData();
-    
+    const token = localStorage.getItem("token");
+    if(!token){
+        return(
+          <>
+          <div className='welcomeMsg'>
+            <img src={Logo} className='welcomeLogo'></img>
+          <h1>Welcome New Friend</h1>
+          <br></br>
+          <h2><Link to = "/register">Join Us</Link> &nbsp; Or &nbsp; 
+          <Link  to ="/login" >Log In</Link></h2>
+          </div>
+          </>
+        )
+    }
     return(
         <div className="blogContent">
        
@@ -36,7 +49,7 @@ export default function Home() {
 export async function postsLoader() {
     const token = localStorage.getItem("token");
     if (!token) {
-        console.error("No token found");
+       // console.error("No token found");
         return [];
       }
   

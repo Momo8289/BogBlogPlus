@@ -13,6 +13,7 @@ body {
   overflow: hidden;
   background: linear-gradient(to bottom,#e3f2fd 0%, #a9d6cc 50%, #98b68c 100%);
   height: 100vh;
+  z-index: 0;
 }
 
 .lilypad-background {
@@ -22,7 +23,7 @@ body {
   background-repeat: no-repeat;
   background-position: center center;
   background-size: contain;
-  z-index: 0;
+  z-index: -1;
   pointer-events: none; /* allows clicks to go through */
   opacity: 0.8;
   height: 100vh;
@@ -303,14 +304,14 @@ body {
   height: 100vh;
   width: 100vw;
   display: grid;
-  grid-template-columns: 1fr 1fr;;
+  grid-template-columns: 1fr 1fr;
   background: linear-gradient(
     #e3f2fd 0%,      
     #c6f4ff 35%,
     #7be2fc 55%,
     #46b1cc 85%
 
-  ) 
+  ) ;
 }
 
 .accountArt{
@@ -372,4 +373,22 @@ body {
 
 .passwordToggle {
   margin-top: 1rem;
+}
+
+.deleteAccountButton{
+  margin-top: 50px;
+  width: fit-content;
+  background-color: #85374e;
+}
+
+.welcomeMsg{
+  text-align: center;
+  width: 100vw;
+  margin-top: 5%;
+  z-index: 1;
+}
+
+.welcomeLogo{
+  height: 25%;
+  width: 25%
 }

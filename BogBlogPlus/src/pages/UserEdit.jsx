@@ -1,4 +1,4 @@
-import { currentUser, updateUser, getUserPosts } from "../utils/api";
+import { currentUser, updateUser, getUserPosts, deleteUser } from "../utils/api";
 import Frog from'../assets/SVG/Frog.svg';
 import {motion} from 'framer-motion'
 import { useState } from "react";
@@ -15,6 +15,7 @@ const [password, setPassword] = useState("");
 const [newPassword, setNewPassword] = useState("");
 const [confirmPassword, setConfirmPassword] = useState("");
 const [error, setError] = useState("");
+const [deleteAcct, setDeleteAcct] = useState(false);
 
 const editAccountHandler = async (e) => {
 
@@ -57,14 +58,37 @@ const editAccountHandler = async (e) => {
     );
 
     //alert("Account successfully updated.");
-    navigate("/"); // or reload the page if you want to reflect changes
+    navigate("/"); 
   } catch (err) {
     //console.error(err);
     setError(`Update failed: ${err.message}`);
   }
 };
 
-
+const  deleteAccountHandler= async () =>{
+    const token = localStorage.getItem("token");
+    if (!token) {
+      console.error("No token found");
+      return;
+    }
+  
+    const confirmed = window.confirm("Are you sure you want to delete your account?");
+    if (!confirmed) return;
+  
+    try {
+      await deleteUser(token, user.id);
+      localStorage.removeItem("token");
+      localStorage.removeItem("userId");
+      localStorage.removeItem("username");
+      navigate("/");
+    } catch (error) {
+        localStorage.removeItem("token");
+        localStorage.removeItem("userId");
+        localStorage.removeItem("username");
+        navigate("/");
+        console.error("Error deleting ", error.message);
+    }
+  };
 
 return(
     <>
@@ -138,7 +162,8 @@ return(
     <br></br>
     <button type="submit">Save Changes</button>
   </form>
-</div>
+</div> 
+<button className="deleteAccountButton" onClick={deleteAccountHandler}> Delete Account</button>
     </div>
    
     
@@ -156,6 +181,8 @@ return(
     </div>
     
  </div>
+
+
     
     </>
 )
