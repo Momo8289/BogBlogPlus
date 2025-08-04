@@ -24,7 +24,8 @@ export default function PostDetails() {
       <br></br>
       <div>{post.body}</div>
       <br></br>
-      {post.author.id === Number(localStorage.getItem("userId")) && (<DeletePost postId={post.id} />)}
+      {post.author.id === Number(localStorage.getItem("userId")) && (<><DeletePost postId={post.id} /> <Link to={`/post/${post.id}/edit`}><button className="editButton">Edit Post</button></Link></>)}
+
     </div>
       <motion.img
       src={bannerUrl}
