@@ -1,9 +1,13 @@
 //page for individual posts
 import {useLoaderData, useNavigate} from "react-router-dom";
 import DeletePost from "../components/DeletePost";
-import {getPost} from "../utils/api.js";
+import bannerUrl from '/src/assets/SVG/banner.svg';
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { getPost } from "../utils/api";
 import LikeButton from "../components/LikeButton.jsx";
 import CommentSection from "../components/CommentSection.jsx";
+import {EditPostButton} from "./EditPost";
 
 export default function PostDetails() {
     const post = useLoaderData();
@@ -21,30 +25,43 @@ export default function PostDetails() {
     };
 
     return (
-        <div className="post-details">
+        <div className="postDetailPage">
+            <div className="post-details">
 
-            <button onClick={handleGoBack} className="back-button">
-                ← Back
-            </button>
+                <button onClick={handleGoBack} className="back-button">
+                    ← Back
+                </button>
 
-            <h2>{post.title}</h2>
-            <br></br>
-            <p><strong>By:</strong> {post.author.username}</p>
-            <p><strong>Posted on:</strong> {new Date(post.author.created_on).toLocaleString()}</p>
-            <br></br>
-            <div>{post.body}</div>
-            <br></br>
-            {post.author.id === Number(localStorage.getItem("userId")) ?
-                <DeletePost postId={post.id}/>
-                :
-                <LikeButton postId={post.id} liked={post.liked} likes={post.likes} />
-            }
+                <h2>{post.title}</h2>
+                <br></br>
+                <p><strong>By:</strong> <Link to={`/user/${post.author.id}/posts`}>{post.author.username}</Link></p>
+                <p><strong>Posted on:</strong> {new Date(post.author.created_on).toLocaleString()}</p>
+                <br></br>
+                <div>{post.body}</div>
+                <br></br>
+                {post.author.id === Number(localStorage.getItem("userId")) ?
+                    <>
+                    <DeletePost postId={post.id}/> &nbsp;
+                    <EditPostButton postId={post.id}/>
+                      </>
+                    :
+                    <LikeButton postId={post.id} liked={post.liked} likes={post.likes} />
+                }
 
-            <CommentSection 
-                postId={post.id} 
-                token={token}
-                currentUserId={currentUserId}
-                isExpanded={true} 
+                <CommentSection
+                    postId={post.id}
+                    token={token}
+                    currentUserId={currentUserId}
+                    isExpanded={true}
+                />
+            </div>
+            <motion.img
+                src={bannerUrl}
+                alt="Banner"
+                className="svg-banner"
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1 }}
             />
         </div>
     );

@@ -1,4 +1,5 @@
-import {Link, useLoaderData} from "react-router-dom";
+import { motion } from "framer-motion";
+import { Link, useLoaderData } from "react-router-dom";
 import {getUser, getUserLikes, getUserPosts} from "../utils/api.js";
 import Posts from "../components/Posts.jsx";
 
@@ -8,16 +9,30 @@ function UserPage() {
     console.log("userPosts in component:", userPosts);
     return (
         <>
-            <h1>{likes ? "Likes" : "Posts"} from {user.username}</h1>
+        <div className="userPageBanner">
+            <h1>{likes ? "Liked" : "Posts"} by {user.username}</h1>
+            <br></br>
             <h3><Link to={`/user/${id}/${likes? 'posts' : 'likes'}`}>View {likes ? "posts" : "likes"}</Link></h3>
             <Posts posts={userPosts} />
+        </div>
         </>
     )
 
 }
+function UserPageHome(){
 
-function UserPageHome() {
-    return <UserPage/>
+  return(
+ <div className="userPage">
+      <motion.div
+        className="lilypad-background"
+        animate={{ y: [0, 10, 0] }}
+        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+      />
+    <UserPage />
+
+     </div>
+  );
+
 }
 
 export async function UserLikedPostLoader({params}) {

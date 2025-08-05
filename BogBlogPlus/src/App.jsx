@@ -9,6 +9,9 @@ import PostDetails, {PostDetailLoader} from "./pages/PostDetail.jsx";
 import Layout from "./components/Layout.jsx";
 import NewPost from "./pages/NewPost";
 import UserPageHome, {UserLikedPostLoader, UserPostDetailLoader} from "./pages/UserPage";
+import EditPost from "./pages/EditPost";
+import UserEdit, {UserDetailLoader} from "./pages/UserEdit";
+import Error from "./pages/Error.jsx";
 
 
 //make pages for main blog pages (all posts), blog post (singular), login, home, loading, error
@@ -24,6 +27,7 @@ function App() {
         {
             path: "/",
             element: <Layout/>,
+            errorElement: <Error />,
             children: [
                 {index: true, element: <Home/>, loader: PostsLoader, handle: {title: "Bog Blog"}},
                 {path: "/post/:id", element: <PostDetails/>, loader: PostDetailLoader, handle: {title: "Post Details"}},
@@ -41,6 +45,13 @@ function App() {
                     element: <UserPageHome/>,
                     loader: UserLikedPostLoader,
                     handle: {title: "User Likes"}
+                },
+                {path: "/post/:id/edit", element: <EditPost/>, loader: PostDetailLoader, handle: {title: "Edit Post"}},
+                {
+                    path: "/user/:id/account",
+                    element: <UserEdit/>,
+                    loader: UserDetailLoader,
+                    handle: {title: "Edit User Information"}
                 }
             ],
         },

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ConfirmModal from "./ConfirmModal.jsx";
+import { Link } from "react-router";
 
 const Comment = ({ comment, currentUserId, onDelete, onEdit }) => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -22,16 +23,19 @@ const Comment = ({ comment, currentUserId, onDelete, onEdit }) => {
   };
 
   return (
+
     <>
-      <div className="comment">
-        <div className="comment-header">
-          <span className="comment-author">
-            {comment.author?.username || "Anonymous"}
-          </span>
-          <span className="comment-date">
-            {comment.timestamp &&
-              new Date(comment.timestamp).toLocaleDateString()}
-          </span>
+
+    <div className="comment">
+      <div className="comment-header">
+        <span className="comment-author">
+         {comment.author?(<Link to={`/user/${comment.user_id}/posts`}>{comment.author.username}</Link>) : "Anonymous"}
+        </span>
+        <span className="comment-date">
+          {comment.timestamp &&
+            new Date(comment.timestamp).toLocaleDateString()}
+        </span>
+
         </div>
         <div className="comment-body">{comment.body}</div>
 

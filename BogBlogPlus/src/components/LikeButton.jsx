@@ -1,5 +1,7 @@
 import {useState} from "react";
 import {likePost, unlikePost} from "../utils/api.js";
+import { HeartIcon as HeartIconOutline } from "@heroicons/react/24/outline";
+import { HeartIcon as HeartIconSolid } from "@heroicons/react/24/solid";
 
 export default function LikeButton({liked, postId, likes}) {
     const [postLiked, setPostLiked] = useState(liked)
@@ -29,6 +31,16 @@ export default function LikeButton({liked, postId, likes}) {
     }
 
     return (
-        <button disabled={disable} onClick={likePostHandler}>{postLiked ? "Unlike" : "Like"} post ({likeCount})</button>
-    )
+<button
+  disabled={disable}
+  onClick={likePostHandler}
+  className="like-button"
+>
+  {postLiked ? (
+    <HeartIconSolid className="heartIcon h-5 w-5 "/>
+  ) : (
+    <HeartIconOutline className="heartIcon h-5 w-5 " />
+  )}
+  <span className="ml-1">{likeCount}</span>
+</button>    )
 }

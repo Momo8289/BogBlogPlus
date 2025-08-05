@@ -1,15 +1,17 @@
-import {useState} from "react";
-import {useNavigate} from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import bannerUrl from '/src/assets/SVG/banner.svg';
 import {ApiError, createPost} from "../utils/api.js";
 
 export default function NewPost() {
-    const navigate = useNavigate();
-    const [title, setTitle] = useState("");
-    const [body, setBody] = useState("");
-    const [error, setError] = useState("");
+  const navigate = useNavigate();
+  const [title, setTitle] = useState("");
+  const [body, setBody] = useState("");
+  const [error, setError] = useState("");
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
         const token = localStorage.getItem("token");
         if (!token) {
@@ -29,33 +31,44 @@ export default function NewPost() {
         }
     };
 
-    return (
-        <div className="new-post-container">
-            {error && <p style={{color: "red"}}>{error}</p>}
+  return (
+    <div className="newPostPage">
+    <div className="new-post-container">
+      {error && <p style={{ color: "red" }}>{error}</p>}
 
-            <form onSubmit={handleSubmit} className="post-form">
-                <div>
-                    <label>Title:</label><br/>
-                    <input
-                        type="text"
-                        value={title}
-                        onChange={(e) => setTitle(e.target.value)}
-                        required
-                    />
-                </div>
-
-                <div>
-                    <label>Content:</label><br/>
-                    <textarea
-                        rows="6"
-                        value={body}
-                        onChange={(e) => setBody(e.target.value)}
-                        required
-                    />
-                </div>
-
-                <button type="submit">Post</button>
-            </form>
+      <form onSubmit={handleSubmit} className="post-form">
+        <div>
+          <label>Title:</label><br />
+          <input
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            required
+          />
         </div>
-    );
+
+        <div>
+          <label>Content:</label><br />
+          <textarea
+            rows="6"
+            value={body}
+            onChange={(e) => setBody(e.target.value)}
+            required
+          />
+        </div>
+
+        <button type="submit">Post</button>
+      </form>
+    </div>
+    <motion.img
+  src={bannerUrl}
+  alt="Banner"
+  className="svg-banner"
+  initial={{ opacity: 0, y: 50 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 1 }}
+/>
+
+    </div>
+  );
 }

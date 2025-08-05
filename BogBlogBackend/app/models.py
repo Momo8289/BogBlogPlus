@@ -8,6 +8,12 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 from app import db
 
+DELETED_USER = {
+    "id": 0,
+    "username": "[deleted_user]",
+    "created_on": 0
+}
+
 
 class User(db.Model):
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
@@ -55,7 +61,7 @@ class Post(db.Model):
             "title": self.title,
             "body": self.body,
             "timestamp": self.timestamp,
-            "author": self.author.json_repr(),
+            "author": self.author.json_repr() if self.author else DELETED_USER,
             "likes": Like.query.where(Like.post_id == self.id).count(),
             "comments": Comment.query.where(Comment.post_id == self.id).count()
         }
@@ -84,7 +90,7 @@ class Comment(db.Model):
             "id": self.id,
             "body": self.body,
             "timestamp": self.timestamp,
-            "author": self.author.json_repr(),
+            "author": self.author.json_repr() if self.author else DELETED_USER,
             "post_id": self.post_id,
             "user_id": self.user_id
         }
