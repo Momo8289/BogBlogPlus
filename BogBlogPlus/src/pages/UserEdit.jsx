@@ -15,6 +15,8 @@ function UserEdit() {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [error, setError] = useState("");
 
+    console.log(user, posts);
+
     const editAccountHandler = async (e) => {
 
         e.preventDefault();
@@ -99,7 +101,7 @@ function UserEdit() {
                             <br></br><br></br>
                             <h5>Member since: {new Date(user.created_on).toLocaleString()}</h5>
                             <br></br>
-                            <h5>Number of Bog Blog Posts: {posts.length}</h5>
+                            <h5>Number of Bog Blog Posts: {posts.data.length}</h5>
                         </div>
                     </div>
                     <div className="editAccount">

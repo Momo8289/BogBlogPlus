@@ -1,6 +1,10 @@
 import ErrorArt from '../assets/SVG/errorFrog.svg';
 import {motion} from 'framer-motion'
 
+{/* <TODO>- Main page doesn't scale down properly,
+ and doesn't  properly when comments are expanded
+- Need some kind of visual indicator to show the bottom border of the navbar
+</TODO> */}
 
 function Error(){
 return(
