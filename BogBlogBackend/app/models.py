@@ -85,7 +85,8 @@ class Comment(db.Model):
             "body": self.body,
             "timestamp": self.timestamp,
             "author": self.author.json_repr(),
-            "post_id": self.post_id
+            "post_id": self.post_id,
+            "user_id": self.user_id
         }
 
     def __repr__(self):
