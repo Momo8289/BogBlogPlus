@@ -11,6 +11,7 @@ import NewPost from "./pages/NewPost";
 import UserPageHome, {userPostDetailLoader} from "./pages/UserPage";
 import EditPost from "./pages/EditPost";
 import UserEdit, {userDetailLoader} from "./pages/UserEdit";
+import Error from "./pages/Error";
 
 
 
@@ -26,6 +27,7 @@ function App() {
         //handle will contain the value passed into the navbar for the title generation
         {path: "/",
         element: <Layout />,
+        errorElement: <Error />,
         children: [
           { index: true, element: <Home />, loader: postsLoader, handle: {title:"Bog Blog"}},
           { path: "/post/:id", element: <PostDetails />, loader: postDetailLoader, handle: {title:"Post Details"}},
