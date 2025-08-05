@@ -1,9 +1,14 @@
-import {Link} from "react-router-dom";
-import {tokenLogout} from "../utils/api.js";
+import { Link } from "react-router-dom";
+import { tokenLogout } from "../utils/api";
+import {Bars3Icon, XMarkIcon} from "@heroicons/react/16/solid"
+import { useState } from "react";
 
 export default function NavBar({title}) {
-    const token = localStorage.getItem("token");
-    const handleLogout = () => {
+  const token = localStorage.getItem("token");
+  const id = localStorage.getItem("userId");
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const handleLogout = () => {
         void tokenLogout(token);
         localStorage.removeItem("token");
         localStorage.removeItem("username")
@@ -11,24 +16,36 @@ export default function NavBar({title}) {
         window.location.href = "/login";
     };
 
-    return (
-        <nav className="navbar">
-            <h1 className="navbar-title">{title}</h1>
-            <div className="navbar-links">
-                <Link to="/">Home</Link> &nbsp; | &nbsp;
-                {token && (
-                    <>
-                        <Link to="/new">New Post</Link> &nbsp; | &nbsp;
-                        Logged in as {localStorage.getItem("username")} &nbsp;
-                        <button onClick={handleLogout}>Logout</button>
-                    </>)}
-                {!token && (
-                    <>
-                        <Link to="/login">Login</Link> &nbsp; | &nbsp;
-                        <Link to="/register">Register</Link>
-                    </>)}
+  return (
+    <nav className="navbar">
+        <div className="titleLink"><Link to="/" ><img className="navBarLogo" src={"/src/assets/SVG/Logo.svg"}/></Link>
+    <h1 className="navbar-title">{title}</h1></div>
 
-            </div>
-        </nav>
-    );
+    <button className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
+  {menuOpen ? (
+    <XMarkIcon className="bar-icon" id="barButton" /> // close icon
+  ) : (
+    <Bars3Icon className="bar-icon" id="barButton" /> // hamburger icon
+  )}
+</button>
+
+    <div className={`navbar-links ${menuOpen ? "show" : ""}`}>
+     
+      {token ? (
+      <> <ul className="navbarList">
+        <li><Link to="/">Home</Link> </li> 
+      <li><Link to= {`/user/${id}/posts`}>My Posts</Link> </li>  
+       <li><Link to="/new">New Post</Link> </li> 
+       <li><Link to={`/user/${id}/account`}>My Account</Link></li>
+       <li> <button className="barButtonLogout" onClick={handleLogout}>Logout</button></li>
+        </ul> </>):(
+        <><ul className="navbarList">
+        <li><Link to="/">Home</Link> </li> 
+         <li><Link to="/login">Login</Link></li> 
+         <li> <Link to="/register">Register</Link></li>
+       </ul>  </>)}
+     
+    </div>
+  </nav>
+);
 }

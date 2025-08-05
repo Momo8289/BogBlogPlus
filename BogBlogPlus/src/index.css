@@ -13,17 +13,17 @@ html, body {
 }
 
 button{
-  background-color: aquamarine;
-  border-radius: 3.5px;
-  padding: 5px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: rgb(64, 143, 117);
+  padding: 0.75rem 1.5rem;
+  border: none;
+  background-color: #4e8f74;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
 }
 button:hover{
-  background-color: rgb(196, 255, 235);
-  border-color: rgb(196, 255, 235);
+  background-color: #58a585;
 }
 button:active{
   background-color: rgb(64, 143, 117);
 }
+
