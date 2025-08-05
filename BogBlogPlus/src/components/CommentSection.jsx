@@ -21,6 +21,7 @@ const CommentsSection = ({
   const [editingComment, setEditingComment] = useState(null);
   const [showComments, setShowComments] = useState(isExpanded);
   const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
 
   const displayCount =
     comments.length > 0 || showComments ? comments.length : initialCommentCount;
@@ -51,9 +52,17 @@ const CommentsSection = ({
   const handleCreateComment = async (body) => {
     try {
       setError(null);
+        setSuccess(null);
 
       await createComment(token, postId, body);
       await loadComments();
+
+        setSuccess("Comment posted successfully");
+
+        setTimeout(() => {
+          setSuccess(null);
+        }, 3000);
+
     } catch (error) {
       console.error("Error creating comment:", error);
       setError("Failed to create comment");
@@ -78,9 +87,17 @@ const CommentsSection = ({
   const handleDeleteComment = async (commentId) => {
     try {
       setError(null);
+      setSuccess(null);
 
       await deleteComment(token, commentId);
       await loadComments();
+
+        setSuccess("Comment deleted successfully");
+
+        setTimeout(() => {
+          setSuccess(null);
+        }, 3000);
+
     } catch (error) {
       console.error("Error deleting comment:", error);
       setError("Failed to delete comment");
@@ -110,6 +127,7 @@ const CommentsSection = ({
       {showComments && (
         <div className="comments-content">
           {error && <div className="error-message">{error}</div>}
+          {success && <div className="success-message">{success}</div>}
 
           <CommentForm onSubmit={handleCreateComment} />
 
