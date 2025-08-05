@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { tokenLogout } from "../utils/api";
-import {Bars3Icon} from "@heroicons/react/16/solid"
+import {Bars3Icon, XMarkIcon} from "@heroicons/react/16/solid"
 import { useState } from "react";
 
 export default function NavBar({title}) {
@@ -22,8 +22,12 @@ export default function NavBar({title}) {
     <h1 className="navbar-title">{title}</h1></div>
 
     <button className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
-        <Bars3Icon className="bar-icon" id="barButton"/>
-      </button>
+  {menuOpen ? (
+    <XMarkIcon className="bar-icon" id="barButton" /> // close icon
+  ) : (
+    <Bars3Icon className="bar-icon" id="barButton" /> // hamburger icon
+  )}
+</button>
 
     <div className={`navbar-links ${menuOpen ? "show" : ""}`}>
      
@@ -32,9 +36,9 @@ export default function NavBar({title}) {
         <li><Link to="/">Home</Link> </li> 
       <li><Link to= {`/user/${id}/posts`}>My Posts</Link> </li>  
        <li><Link to="/new">New Post</Link> </li> 
-       <li><Link to={`/user/${id}/account`}>My Account</Link></li> </ul>
-        <button className="barButtonLogout" onClick={handleLogout}>Logout</button>
-        </>):(
+       <li><Link to={`/user/${id}/account`}>My Account</Link></li>
+       <li> <button className="barButtonLogout" onClick={handleLogout}>Logout</button></li>
+        </ul> </>):(
         <><ul className="navbarList">
         <li><Link to="/">Home</Link> </li> 
          <li><Link to="/login">Login</Link></li> 

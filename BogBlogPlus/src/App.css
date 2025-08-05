@@ -14,6 +14,7 @@ body {
   background: linear-gradient(to bottom,#e3f2fd 0%, #a9d6cc 50%, #98b68c 100%);
   height: 100vh;
   z-index: 0;
+  scrollbar-width: none ;
 }
 
 .lilypad-background {
@@ -21,11 +22,10 @@ body {
   inset: 0;
   background-image: url("./assets/SVG/LillyPads.svg");
   background-repeat: no-repeat;
-  background-position: center center;
+  background-position: center;
   background-size: contain;
   z-index: -1;
-  pointer-events: none; /* allows clicks to go through */
-  opacity: 0.8;
+  pointer-events: none; 
   height: 100vh;
 }
 
@@ -38,6 +38,9 @@ body {
   padding: 2rem;
   max-width: 1200px;
   margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+  
 }
 
 
@@ -52,6 +55,9 @@ body {
   transition: transform 0.3s ease;
   color: black;
   align-self: start;
+  min-width: 0; 
+  max-width: 100%; 
+  box-sizing: border-box;
   
 }
 .card:hover {
@@ -165,9 +171,7 @@ margin: 0;
     width: 100%;
   }
 }
-.navbar-links{
-  display: flex;
-}
+
 .navbarList{
   margin-top: 10px;
   list-style: none;
@@ -376,7 +380,9 @@ margin: 0;
 
 /*account details page*/
 .accountPage{
-  height: 100vh;
+  position: relative;
+  min-height: 100vh; 
+  height: auto;
   width: 100vw;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -387,11 +393,54 @@ margin: 0;
     #46b1cc 85%
 
   ) ;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .accountPage {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    position: relative;
+  }
+
+  .accountArt {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    z-index: 0;
+    opacity: 0.2;
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .accountFrog {
+    width: 100%;
+    height: 100%;
+  }
+
+  .accountFrog svg,
+  .accountFrog img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .accountContainer {
+    position: relative;
+    z-index: 1;
+    padding: 1.5rem;
+  }
 }
 
 .accountArt{
+  transition: all 0.6s ease-in-out;
+  margin-top: 25px;
  height: 30vh;
- width: 30vw;
+ max-width: 40vw;
  margin-left: 40px;
 }
 
@@ -462,7 +511,14 @@ margin: 0;
   margin-top: 5%;
   z-index: 1;
 }
+.welcomeMsg h1 {
+  font-size: clamp(1.5rem, 5vw, 2.5rem);
+  margin-bottom: 1rem;
+}
 
+.welcomeMsg h2 {
+  font-size: clamp(1rem, 4vw, 1.5rem);
+}
 .welcomeLogo{
   height: 25%;
   width: 25%
