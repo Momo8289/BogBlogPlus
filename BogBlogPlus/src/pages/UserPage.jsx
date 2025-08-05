@@ -1,25 +1,23 @@
 import { motion } from "framer-motion";
 import { Link, useLoaderData } from "react-router-dom";
+import {getUser, getUserLikes, getUserPosts} from "../utils/api.js";
+import Posts from "../components/Posts.jsx";
 
-
-function UserPage(){
-    const userPosts = useLoaderData();
+function UserPage() {
+    const {posts: userPosts, likes, id, user} = useLoaderData();
+    console.log(userPosts, likes, id, user)
     console.log("userPosts in component:", userPosts);
-return(
-    <div className="blogContent">
-   
-    {userPosts.map(post =>  <div className="card " key={post.id}>
-         <Link to={`/post/${post.id}`}><h4>{post.title}</h4></Link>
-         <p ><strong>By:</strong> {post.author.username}</p>
-         <p><strong>Posted on:</strong> {new Date(post.timestamp).toLocaleString()}</p>
-         </div>)}
-    
-    </div>
-)
+    return (
+        <>
+            <h1>{likes ? "Likes" : "Posts"} from {user.username}</h1>
+            <h3><Link to={`/user/${id}/${likes? 'posts' : 'likes'}`}>View {likes ? "posts" : "likes"}</Link></h3>
+            <Posts posts={userPosts} />
+        </>
+    )
 
 }
 function UserPageHome(){
- 
+
   return(
  <div className="userPage">
       <motion.div
@@ -28,26 +26,32 @@ function UserPageHome(){
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
       />
     <UserPage />
-     
+
      </div>
   );
-  
+
 }
-export async function userPostDetailLoader({ params }) {
+
+export async function UserLikedPostLoader({params}) {
+    const token = localStorage.getItem("token");
+    if(!token) return [];
+    const [{data}, {data: userData}] = await Promise.all([
+        getUserLikes(token, params.id),
+        getUser(token, params.id)
+    ])
+    return {posts: data, likes: true, id: params.id, user: userData}
+}
+
+export async function UserPostDetailLoader({params}) {
     const token = localStorage.getItem("token");
     if (!token) return [];
-  
-    const response = await fetch(`http://127.0.0.1:5055/api/user/${params.id}/posts`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-  
-    const data = await response.json();
-    if (!response.ok) return [];
-  
-    console.log("Loader received from API:", data); 
-  
-    return data; 
-  }
-  
-  
+
+    const [{data}, {data: userData}] = await Promise.all([
+        getUserPosts(token, params.id),
+        getUser(token, params.id)
+    ])
+    return {posts: data, likes: false, id: params.id, user: userData}
+}
+
+
 export default UserPageHome;

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import bannerUrl from '/src/assets/SVG/banner.svg';
-import { createPost } from "../utils/api";
+import {ApiError, createPost} from "../utils/api.js";
 
 export default function NewPost() {
   const navigate = useNavigate();
@@ -13,22 +13,23 @@ export default function NewPost() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const token = localStorage.getItem("token");
-    if (!token) {
-      setError("You must be logged in to create a post.");
-      return;
-    }
+        const token = localStorage.getItem("token");
+        if (!token) {
+            setError("You must be logged in to create a post.");
+            return;
+        }
+        try {
+            await createPost(token, title, body)
+            navigate("/"); // redirect to home
 
-    const response = await createPost(token, title, body)
-    
-    const data = await response;
-
-    if (response) {
-      navigate("/"); 
-    } else {
-      setError(data.message || "Failed to create post.");
-    }
-  };
+        } catch (err) {
+            if(err instanceof ApiError) {
+                setError("Failed to create post.");
+            } else {
+                throw err;
+            }
+        }
+    };
 
   return (
     <div className="newPostPage">

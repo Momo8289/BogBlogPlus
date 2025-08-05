@@ -5,32 +5,19 @@ export default function NavBar({title}) {
   const token = localStorage.getItem("token");
   const id = localStorage.getItem("userId");
 
-
-  const handleLogout = async () => {
-
-     const token = localStorage.getItem("token");
-  if (token) {
-    try {
-      await tokenLogout(token);
-    } catch (err) {
-      console.warn("Logout failed or token already invalid:", err.message);
-      
-    }
-  }
-
-  
-  localStorage.removeItem("token");
-  localStorage.removeItem("userId");
-  localStorage.removeItem("username"); 
-  window.location.href = "/login"; 
-  };
-  
+  const handleLogout = () => {
+        void tokenLogout(token);
+        localStorage.removeItem("token");
+        localStorage.removeItem("username")
+        localStorage.removeItem("userId")
+        window.location.href = "/login";
+    };
 
   return (
     <nav className="navbar">
         <div className="titleLink"><Link to="/" ><img className="navBarLogo" src={"/src/assets/SVG/Logo.svg"}/></Link>
     <h1 className="navbar-title">{title}</h1></div>
-    
+
     <div className="navbar-links">
       <Link to="/">Home</Link> &nbsp; | &nbsp;
       {token && (

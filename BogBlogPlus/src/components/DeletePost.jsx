@@ -1,10 +1,9 @@
 
 import { useNavigate } from "react-router-dom";
-import { deletePost } from "../utils/api";
+import {deletePost} from "../utils/api.js";
 
 function DeletePost({ postId }) {
     const navigate = useNavigate();
-    
 
     const deletePostHandler = async () => {
         const token = localStorage.getItem("token");
@@ -14,14 +13,18 @@ function DeletePost({ postId }) {
         }
 
         try {
-            const response = await deletePost(token, postId)
-            console.log(response)
-            // redirect to homepage
+            const {response, data} = await deletePost(token, postId);
+
+            if (!response.ok) {
+                console.error("Failed to delete post:", data.message || response.statusText);
+                return;
+            }
+
+            console.log("Post deleted successfully");
+            // redirect to homepage or user's post list
             navigate("/");
         } catch (error) {
-            //console.error("Error deleting post:", error);
-            //api request throws error everytime because it cannot send a json response? delete still works tho
-            navigate("/");
+            console.error("Error deleting post:", error);
         }
     };
 
