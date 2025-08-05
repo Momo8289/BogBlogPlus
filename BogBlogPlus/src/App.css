@@ -382,7 +382,6 @@ margin: 0;
 .accountPage{
   position: relative;
   min-height: 100vh; 
-  height: auto;
   width: 100vw;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -394,53 +393,16 @@ margin: 0;
 
   ) ;
   overflow: hidden;
+  transition: all 0.6s ease-in-out;
 }
 
-@media (max-width: 768px) {
-  .accountPage {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto;
-    position: relative;
-  }
 
-  .accountArt {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    width: 100vw;
-    z-index: 0;
-    opacity: 0.2;
-    pointer-events: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .accountFrog {
-    width: 100%;
-    height: 100%;
-  }
-
-  .accountFrog svg,
-  .accountFrog img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
-
-  .accountContainer {
-    position: relative;
-    z-index: 1;
-    padding: 1.5rem;
-  }
-}
 
 .accountArt{
   transition: all 0.6s ease-in-out;
   margin-top: 25px;
  height: 30vh;
- max-width: 40vw;
+ width: 30vw;;
  margin-left: 40px;
 }
 
@@ -476,7 +438,7 @@ margin: 0;
   padding: 2rem;
   display: flex;
   flex-direction: column;
-  margin-left: 20px;
+  margin-left: 50px;
 }
 
 .editAcctForm{
@@ -696,4 +658,50 @@ margin: 0;
   width: 100vw;
   background: linear-gradient(to bottom, #e3f2fd 0%, #c6f4ff 250%, #A1BA71 80%);
   overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .accountPage {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+  }
+
+  .accountArt {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    z-index: 0;
+    opacity: 0.2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.6s ease-in-out;
+    max-width: 100vw;
+    
+  }
+
+  .accountFrog {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  .frameForFrog {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none; /* Remove border if it's making it smaller */
+  
+    }
+
+
+  .accountContainer {
+    position: relative;
+    z-index: 1;
+    padding: 1.5rem;
+    transition: all 0.6s ease-in-out;
+  }
 }
