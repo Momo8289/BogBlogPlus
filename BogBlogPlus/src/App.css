@@ -49,8 +49,10 @@ body {
   background-color: #fff;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   text-align: left;
-  transition: transform 0.2s ease;
+  transition: transform 0.3s ease;
   color: black;
+  align-self: start;
+  
 }
 .card:hover {
   transform: translateY(-4px);
