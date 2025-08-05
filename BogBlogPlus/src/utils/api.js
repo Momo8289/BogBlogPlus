@@ -24,7 +24,7 @@ const apiRequest = async (url, method, body = null, token = null) => {
         reqBody = JSON.stringify(body)
     }
 
-    const response = await fetch("http://localhost:8080/api/" + url, {
+    const response = await fetch("http://localhost:5000/api/" + url, {
         method,
         body: reqBody,
         headers,
