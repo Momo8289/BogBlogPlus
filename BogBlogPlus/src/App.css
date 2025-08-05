@@ -179,7 +179,9 @@ margin: 0;
   gap: 1.5rem;
 }
 /* postdetail page*/
-
+.postBody{
+overflow-wrap: break-word;
+}
 .post-details {
   max-width: 800px;
   margin: 2rem auto;

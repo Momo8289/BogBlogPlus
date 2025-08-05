@@ -37,7 +37,7 @@ export default function PostDetails() {
                 <p><strong>By:</strong> <Link to={`/user/${post.author.id}/posts`}>{post.author.username}</Link></p>
                 <p><strong>Posted on:</strong> {new Date(post.author.created_on).toLocaleString()}</p>
                 <br></br>
-                <div>{post.body}</div>
+                <div className="postBody">{post.body}</div>
                 <br></br>
                 {post.author.id === Number(localStorage.getItem("userId")) ?
                     <>
