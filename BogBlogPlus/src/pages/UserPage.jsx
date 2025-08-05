@@ -9,9 +9,11 @@ function UserPage() {
     console.log("userPosts in component:", userPosts);
     return (
         <>
-            <h1>{likes ? "Likes" : "Posts"} from {user.username}</h1>
+        <div className="userPageBanner">
+            <h1>{likes ? "Liked" : "Posts"} by {user.username}</h1>
             <h3><Link to={`/user/${id}/${likes? 'posts' : 'likes'}`}>View {likes ? "posts" : "likes"}</Link></h3>
             <Posts posts={userPosts} />
+        </div>
         </>
     )
 

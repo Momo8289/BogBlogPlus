@@ -306,6 +306,11 @@ body {
   height: 100vh;
 }
 
+.userPageBanner{
+  text-align: center;
+  margin-top: 10px;
+}
+
 /*account details page*/
 .accountPage{
   height: 100vh;
