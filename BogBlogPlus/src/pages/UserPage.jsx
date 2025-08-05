@@ -11,6 +11,7 @@ function UserPage() {
         <>
         <div className="userPageBanner">
             <h1>{likes ? "Liked" : "Posts"} by {user.username}</h1>
+            <br></br>
             <h3><Link to={`/user/${id}/${likes? 'posts' : 'likes'}`}>View {likes ? "posts" : "likes"}</Link></h3>
             <Posts posts={userPosts} />
         </div>
