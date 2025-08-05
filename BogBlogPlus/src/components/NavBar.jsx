@@ -1,14 +1,28 @@
 import { Link } from "react-router-dom";
+import { tokenLogout } from "../utils/api";
 
 export default function NavBar({title}) {
   const token = localStorage.getItem("token");
   const id = localStorage.getItem("userId");
 
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("userId");
-    window.location.href = "/login";
+  const handleLogout = async () => {
+
+     const token = localStorage.getItem("token");
+  if (token) {
+    try {
+      await tokenLogout(token);
+    } catch (err) {
+      console.warn("Logout failed or token already invalid:", err.message);
+      
+    }
+  }
+
+  
+  localStorage.removeItem("token");
+  localStorage.removeItem("userId");
+  localStorage.removeItem("username"); 
+  window.location.href = "/login"; 
   };
   
 
