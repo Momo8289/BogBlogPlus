@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { getPost } from "../utils/api";
 import LikeButton from "../components/LikeButton.jsx";
 import CommentSection from "../components/CommentSection.jsx";
+import {EditPostButton} from "./EditPost";
 
 export default function PostDetails() {
     const post = useLoaderData();
@@ -39,7 +40,10 @@ export default function PostDetails() {
                 <div>{post.body}</div>
                 <br></br>
                 {post.author.id === Number(localStorage.getItem("userId")) ?
-                    <DeletePost postId={post.id}/>
+                    <>
+                    <DeletePost postId={post.id}/> &nbsp;
+                    <EditPostButton postId={post.id}/>
+                      </>
                     :
                     <LikeButton postId={post.id} liked={post.liked} likes={post.likes} />
                 }

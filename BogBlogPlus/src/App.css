@@ -245,7 +245,7 @@ margin: 0;
   border-radius: 5px;
 }
 
-.login-card button, .deleteButton, .editButton {
+.login-card button,  .editButton {
   background-color: #4e8f74;
   color: white;
   padding: 0.75rem;
@@ -255,7 +255,7 @@ margin: 0;
   cursor: pointer;
 }
 
-.login-card button, .deleteButton, .editButton:hover {
+.login-card button,  .editButton:hover {
   background-color: #58a585;
 }
 
@@ -461,7 +461,7 @@ margin: 0;
   margin-top: 1rem;
 }
 
-.deleteAccountButton{
+.deleteAccountButton, .deleteButton{
   margin-top: 50px;
   width: fit-content;
   background-color: #85374e;
@@ -494,18 +494,26 @@ margin: 0;
 
 .comments-header {
     margin-bottom: 1rem;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+}
+
+.commentIcon{
+height: 45px;
 }
 
 .toggle-comments-btn {
     background: none;
     border: none;
-    color: #007bff;
+    color:#4e8f74;
     cursor: pointer;
     font-size: 0.9rem;
 }
 
 .toggle-comments-btn:hover {
     text-decoration: underline;
+    background: none;
 }
 
 .comment-form {
@@ -534,7 +542,7 @@ margin: 0;
 }
 
 .comment-form-actions button[type="submit"] {
-    background-color: #007bff;
+    background-color: #4e8f74;
     color: white;
 }
 
@@ -577,7 +585,7 @@ margin: 0;
 .comment-actions button {
     background: none;
     border: none;
-    color: #007bff;
+    color: #4e8f74;
     cursor: pointer;
     font-size: 1rem;
     padding: 0;
@@ -588,7 +596,7 @@ margin: 0;
 }
 
 .edit-btn {
-    color: #007bff !important;
+    color: #4e8f74 !important;
 }
 
 .delete-btn {
@@ -610,7 +618,7 @@ margin: 0;
     align-items: center;
     padding: 0.5rem 1rem;
     margin-bottom: 1rem;
-    background-color: #007bff;
+    background-color: #4e8f74;
     border: 1px solid #dee2e6;
     border-radius: 4px;
     color: white;
@@ -621,13 +629,13 @@ margin: 0;
 }
 
 .back-button:hover {
-    background-color: #e9ecef;
+    background-color: #58a585;
     text-decoration: none;
     color: #495057;
 }
 
 .back-button:focus {
-    outline: 2px solid #007bff;
+    outline: 2px solid #50977a;
     outline-offset: 2px;
 }
 

@@ -3,7 +3,7 @@ import DeletePost from "../components/DeletePost";
 import bannerUrl from '/src/assets/SVG/banner.svg';
 import { motion } from "framer-motion";
 import { getPost, updatePost } from "../utils/api";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useState } from "react";
 
 
@@ -19,7 +19,7 @@ function EditPost(){
     
         const token = localStorage.getItem("token");
         if (!token) {
-          setError("You must be logged in to create a post.");
+          setError("You must be logged in to edit a post.");
           return;
         }
     
@@ -79,6 +79,12 @@ function EditPost(){
     
         </div>
       );
+    }
+
+    export function EditPostButton({postId}){
+        return(
+            <Link to={`/post/${postId}/edit`}><button>Edit Post</button></Link> 
+        )
     }
 
     export async function postDetailLoader({params}){

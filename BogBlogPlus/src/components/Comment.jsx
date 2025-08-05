@@ -1,3 +1,6 @@
+import { Link } from "react-router";
+
+
 const Comment = ({ comment, currentUserId, onDelete, onEdit }) => {
   const handleDelete = () => {
     if (window.confirm("Are you sure you want to delete this comment?")) {
@@ -13,7 +16,7 @@ const Comment = ({ comment, currentUserId, onDelete, onEdit }) => {
     <div className="comment">
       <div className="comment-header">
         <span className="comment-author">
-          {comment.author?.username || "Anonymous"}
+         {comment.author?(<Link to={`/user/${comment.user_id}/posts`}>{comment.author.username}</Link>) : "Anonymous"}
         </span>
         <span className="comment-date">
           {comment.timestamp &&

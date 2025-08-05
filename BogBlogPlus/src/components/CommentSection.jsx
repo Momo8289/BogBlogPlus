@@ -7,6 +7,7 @@ import {
 } from "../utils/api.js";
 import Comment from "./Comment";
 import CommentForm from "./CommentForm";
+import { ChatBubbleLeftRightIcon } from "@heroicons/react/16/solid";
 
 const CommentsSection = ({
   postId,
@@ -102,7 +103,7 @@ const CommentsSection = ({
     <div className="comments-section">
       <div className="comments-header">
         <button onClick={toggleComments} className="toggle-comments-btn">
-          {showComments ? "Hide" : "Show"} Comments ({displayCount})
+        <ChatBubbleLeftRightIcon className="commentIcon" />  {showComments ? "Hide" : "Show"} Comments ({displayCount})
         </button>
       </div>
 
