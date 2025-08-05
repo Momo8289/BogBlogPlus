@@ -35,7 +35,7 @@ def register():
     db.session.add(token)
     db.session.commit()
 
-    response = jsonify({"token": token.token, "expires": token.expires})
+    response = jsonify({"token": token.token, "expires": token.expires, "user": user.json_repr()})
     response.status_code = 201
 
     return response

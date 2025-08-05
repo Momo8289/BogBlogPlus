@@ -1,7 +1,14 @@
-class ApiError extends Error {
+export class ApiError extends Error {
     constructor(message) {
         super(message)
         this.name = "ApiError"
+    }
+}
+
+export class Forbidden extends ApiError {
+    constructor(message) {
+        super(message)
+        this.name = "Forbidden"
     }
 }
 
@@ -13,21 +20,34 @@ const apiRequest = async (url, method, body = null, token = null) => {
         headers["Authorization"] = `Bearer ${token}`
     }
     let reqBody;
-    if(body) {
+    if (body) {
         reqBody = JSON.stringify(body)
     }
 
-    const response = await fetch("http://localhost:5055/api/" + url, {
+    const response = await fetch("http://localhost:5000/api/" + url, {
         method,
         body: reqBody,
         headers,
     })
 
     if (!response.ok) {
-        throw new ApiError(`Server responded with ${response.status} ${response.statusText}. ${(await response.json())?.message}`)
+        const {message} = await response.json()
+        switch (response.status) {
+            case 403:
+                throw new Forbidden(message)
+            default:
+                throw new ApiError(message)
+        }
     }
-
-    return (await response.json())
+    let json
+    try {
+        json = await response.json()
+    } catch (err) {
+        if(!(err instanceof SyntaxError)) {
+            throw err
+        }
+    }
+    return {data: json || {}, response}
 }
 
 // Tokens

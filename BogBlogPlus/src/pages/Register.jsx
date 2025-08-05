@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import LogoSVG from "../components/FloatingLogo";
-import { registerUser, currentUser } from "../utils/api";
+import { registerUser } from "../utils/api";
 
 export default function Register() {
   const [username, setUsername] = useState("");
@@ -14,33 +14,28 @@ export default function Register() {
   const handleRegister = async (e) => {
     e.preventDefault();
 
-    if (password.length < 8) {
-      setError("Password must be at least 8 characters."); 
-      return;
-    }
+        // Basic validation
+        if (password.length < 8) {
+            setError("Password must be at least 8 characters.");
+            return;
+        }
+        if (password !== confirmPassword) {
+            setError("Passwords do not match.");
+            return;
+        }
+        try {
+            const {data} = await registerUser(username, password)
+            localStorage.setItem("token", data.token);
+            localStorage.setItem("userId", data.user.id)
+            localStorage.setItem("username", data.user.username)
+            navigate("/");
 
-    if (password !== confirmPassword) {
-      setError("Passwords do not match.");
-      return;
-    }
+        } catch (err) {
+            console.error(err)
+            setError(err.message || "Registration failed.");
+        }
 
-    try {
-    
-      const { token } = await registerUser(username, password);
-      localStorage.setItem("token", token);
-
-      const userData = await currentUser(token);
-
-      localStorage.setItem("userId", userData.id);
-      localStorage.setItem("username", userData.username);
-
-      navigate("/");
-    } catch (err) {
-      console.error("Registration failed:", err);
-      setError(err.message || "Something went wrong during registration.");
-    }
-  };
-
+    };
 
   return (
     <div className="registerPage">
